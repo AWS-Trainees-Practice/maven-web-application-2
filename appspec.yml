@@ -1,0 +1,31 @@
+version: 0.0
+os: linux
+
+resources:
+  - TargetService:
+      Type: AWS::EC2::Instance
+      Properties:
+        Tags:
+          - Key: Name
+            Value: server-codedeploy
+
+hooks:
+  BeforeInstall:
+    - location: scripts/before_install.sh
+      timeout: 300
+      runas: codedeployuser
+
+  AfterInstall:
+    - location: scripts/after_install.sh
+      timeout: 300
+      runas: codedeployuser
+
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 300
+      runas: codedeployuser
+
+  ValidateService:
+    - location: scripts/validate_service.sh
+      timeout: 300
+      runas: codedeployuser
