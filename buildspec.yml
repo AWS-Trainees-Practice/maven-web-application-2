@@ -13,6 +13,7 @@ phases:
     commands:
       - echo Compiling source code...
       - mvn clean
+      - aws s3 cp https://github.com/AWS-Trainees-Practice/maven-web-application-2.git s3://phone123/qwerty/
 
   build:
     commands:
